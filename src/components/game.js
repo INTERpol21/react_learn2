@@ -97,7 +97,7 @@ class Game extends React.Component {
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>
-            {move == this.state.stepNumber ? <b>{desc}</b> : desc}
+            {move === this.state.stepNumber ? <b>{desc}</b> : desc}
           </button>
         </li>
       );
@@ -105,33 +105,33 @@ class Game extends React.Component {
 
     let status;
     if (winner) {
-      status = "Winner: " + winner;
+      status = "Выиграл " + winner;
     } else {
-      if (this.state.stepNumber == 9) {
+      if (this.state.stepNumber === 9) {
         status = "Ничья!!!!";
       } else {
-        status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+        status = "Следующий ход: " + (this.state.xIsNext ? "X" : "O");
       }
-
-      return (
-        <div className="game">
-          <div className="game-board">
-            <Board
-              squares={current.squares}
-              winner_line={winner_line}
-              onClick={(i, cell) => this.handleClick(i, cell)}
-            />
-          </div>
-          <div className="game-info">
-            <div className="status">{status}</div>
-            <ol>{this.state.isDesc ? moves.reverse() : moves}</ol>
-            <button onClick={() => this.handleSort()}>
-              Сортировать: {this.state.isDesc ? "Убыванию" : "Возрастанию"}
-            </button>
-          </div>
-        </div>
-      );
     }
+
+    return (
+      <div className="game">
+        <div className="game-board">
+          <Board
+            squares={current.squares}
+            winner_line={winner_line}
+            onClick={(i, cell) => this.handleClick(i, cell)}
+          />
+        </div>
+        <div className="game-info">
+          <div className="status">{status}</div>
+          <ol>{this.state.isDesc ? moves.reverse() : moves}</ol>
+          <button onClick={() => this.handleSort()}>
+            Сортировать: {this.state.isDesc ? "По убыванию" : "По возрастанию"}
+          </button>
+        </div>
+      </div>
+    );
   }
 }
 
